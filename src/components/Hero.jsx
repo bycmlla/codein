@@ -9,7 +9,10 @@ export default function Hero() {
           <p className="eyebrow">CodeIn Tecnologia</p>
 
           <h1 className="hero-title">
-            Software feito para o <span className="highlight">seu negócio.</span>
+            <span className="hero-title-line">Software feito</span>{' '}
+            <span className="hero-title-line">
+              para o <span className="highlight">seu negócio.</span>
+            </span>
           </h1>
 
           <p className="hero-text">

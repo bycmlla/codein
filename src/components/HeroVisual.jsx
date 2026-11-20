@@ -10,7 +10,7 @@ import './HeroVisual.css'
  * O brilho do símbolo e as trilhas usam as coordenadas do render original,
  * dentro de .cpu-core.
  */
-const EXT_W = 520
+const EXT_W = 820
 const CORE_W = 957
 const RENDER_W = EXT_W + CORE_W
 const RENDER_H = 841

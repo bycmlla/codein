@@ -40,11 +40,23 @@
 
 .hero-title {
   margin: 0;
-  font-size: clamp(3rem, 6.4vw, 5.9rem);
+  /* 76px no desktop (≈72px em 1440px), reduzindo em telas menores */
+  font-size: clamp(2.75rem, 1rem + 4vw, 4.75rem);
   font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.065em;
+  line-height: 1.08;
+  letter-spacing: -0.06em;
   color: var(--text);
+}
+
+/* Duas linhas fixas no desktop: "Software feito" / "para o seu negócio." */
+.hero-title-line {
+  display: block;
+}
+
+@media (min-width: 961px) {
+  .hero-title-line {
+    white-space: nowrap;
+  }
 }
 
 .highlight {
