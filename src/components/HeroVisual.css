@@ -1,145 +1,192 @@
-.visual {
-  position: relative;
-  height: 560px;
-  display: grid;
-  place-items: center;
-  /* esmaece as bordas da cena, como no layout de referência */
-  -webkit-mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 62%, transparent 100%);
-  mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 62%, transparent 100%);
+/* Ocupa a coluna da direita só para manter a altura do layout;
+   a imagem em si é posicionada em relação ao .hero, de ponta a ponta. */
+.cpu-visual {
+  min-height: 560px;
+  pointer-events: none;
 }
 
-.visual-glow {
+.cpu-stage {
   position: absolute;
-  width: 70%;
-  height: 70%;
+  z-index: 0;
+  top: 50%;
+  right: 0;
+  /* o render original ocupa ~57% da largura (escala da referência);
+     a extensão da placa à esquerda acrescenta largura sem ampliar o processador */
+  width: calc(min(57vw, 1000px) * var(--board-scale, 1));
+  translate: 0 -50%;
+  isolation: isolate;
+  /* fade horizontal longo: quase invisível atrás do texto, crescendo até o processador */
+  --fade-x: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.02) 10%,
+    rgba(0, 0, 0, 0.05) 18%,
+    rgba(0, 0, 0, 0.1) 26%,
+    rgba(0, 0, 0, 0.18) 33%,
+    rgba(0, 0, 0, 0.3) 39%,
+    rgba(0, 0, 0, 0.46) 45%,
+    rgba(0, 0, 0, 0.64) 51%,
+    rgba(0, 0, 0, 0.8) 57%,
+    rgba(0, 0, 0, 0.93) 63%,
+    #000 69%
+  );
+  --fade-y: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.5) 7%,
+    #000 16%,
+    #000 82%,
+    rgba(0, 0, 0, 0.5) 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: var(--fade-x), var(--fade-y);
+  mask-image: var(--fade-x), var(--fade-y);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  animation: cpu-enter 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Leva o tom azul-marinho da placa para a esquerda, suavizando a transição
+   entre a imagem e o fundo do site (sem criar uma segunda imagem). */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 62% 75% at 78% 50%,
+    rgba(4, 11, 22, 0.95) 0%,
+    rgba(5, 12, 23, 0.7) 40%,
+    rgba(8, 13, 22, 0.3) 70%,
+    transparent 100%
+  );
+}
+
+.cpu-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+}
+
+/* Energização: faixa de luz que percorre a placa, concentrada perto do processador */
+.cpu-energize {
+  filter: brightness(1.8) saturate(1.3);
+  mix-blend-mode: screen;
+  opacity: 0.45;
+  -webkit-mask-image:
+    linear-gradient(115deg, transparent 40%, #000 50%, transparent 60%),
+    radial-gradient(ellipse 26% 40% at 65% 50%, #000 35%, transparent 100%);
+  mask-image:
+    linear-gradient(115deg, transparent 40%, #000 50%, transparent 60%),
+    radial-gradient(ellipse 26% 40% at 65% 50%, #000 35%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  -webkit-mask-size: 300% 100%, 100% 100%;
+  mask-size: 300% 100%, 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 100% 0, 0 0;
+  mask-position: 100% 0, 0 0;
+  animation: cpu-sweep 9s ease-in-out 1s infinite;
+}
+
+/* Área do render original (à direita), onde ficam brilho e trilhas */
+.cpu-core {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+
+/* Pulsação discreta do símbolo >_ */
+.cpu-glyph-glow {
+  position: absolute;
+  left: 46.5%;
+  top: 46.4%;
+  width: 16%;
+  aspect-ratio: 2 / 1;
+  transform: translate(-50%, -50%) rotate(-14deg);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(46, 107, 255, 0.32) 0%, rgba(46, 107, 255, 0) 70%);
-  filter: blur(30px);
+  background: radial-gradient(closest-side, rgba(90, 145, 255, 0.5), rgba(46, 107, 255, 0.16) 55%, transparent);
+  mix-blend-mode: screen;
+  filter: blur(6px);
+  opacity: 0.3;
+  animation: cpu-pulse 4.5s ease-in-out 1.6s infinite;
 }
 
-.visual-dots {
+.cpu-traces {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(140, 170, 255, 0.16) 1px, transparent 1.4px);
-  background-size: 16px 16px;
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, transparent 60%);
-  mask-image: radial-gradient(circle at 50% 50%, #000 0%, transparent 60%);
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
 }
 
-.scene {
-  perspective: 1800px;
+@keyframes cpu-enter {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-.plane {
-  --size: 290px;
-  position: relative;
-  width: var(--size);
-  height: var(--size);
-  transform-style: preserve-3d;
-  transform: rotateX(58deg) rotateZ(-40deg);
+@keyframes cpu-sweep {
+  0% {
+    -webkit-mask-position: 100% 0, 0 0;
+    mask-position: 100% 0, 0 0;
+  }
+  45%,
+  100% {
+    -webkit-mask-position: 0% 0, 0 0;
+    mask-position: 0% 0, 0 0;
+  }
 }
 
-/* Contornos ao redor da tecla */
-.ring {
-  position: absolute;
-  border: 1px solid rgba(110, 150, 255, 0.35);
-  transform: translateZ(0);
-}
-
-.ring-1 {
-  inset: -32px;
-  border-radius: 56px;
-}
-
-.ring-2 {
-  inset: -70px;
-  border-radius: 72px;
-  border-color: rgba(110, 150, 255, 0.24);
-}
-
-.ring-3 {
-  inset: -118px;
-  border-radius: 92px;
-  border-color: rgba(110, 150, 255, 0.16);
-}
-
-/* Camadas empilhadas */
-.layer {
-  position: absolute;
-  inset: 0;
-  border-radius: 44px;
-  background: #1a3e9e;
-  border: 2px solid #4f84ff;
-  transform: translateZ(var(--z));
-}
-
-/* Face superior */
-.key {
-  position: absolute;
-  inset: 0;
-  border-radius: 44px;
-  transform: translateZ(28px);
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.22), transparent 55%),
-    linear-gradient(140deg, #4f86ff 0%, #2e6bff 38%, #1f4fc8 70%, #173a96 100%);
-  border: 2px solid rgba(180, 205, 255, 0.75);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-    inset 0 -30px 60px rgba(8, 20, 60, 0.45);
-  animation: key-float 6s ease-in-out infinite;
-}
-
-.key-glyph {
-  width: 52%;
-  color: #dbe6ff;
-  filter: drop-shadow(0 0 10px rgba(170, 200, 255, 0.55));
-  transform: translateX(-3%);
-}
-
-@keyframes key-float {
+@keyframes cpu-pulse {
   0%,
   100% {
-    transform: translateZ(28px);
+    opacity: 0.25;
   }
   50% {
-    transform: translateZ(40px);
+    opacity: 0.55;
+  }
+}
+
+/* Mobile: a imagem volta para o fluxo, abaixo do texto */
+@media (max-width: 960px) {
+  .cpu-visual {
+    min-height: 0;
+    margin: 16px calc(var(--gutter) * -1) 0;
+  }
+
+  .cpu-stage {
+    position: relative;
+    top: auto;
+    translate: none;
+    /* o render original preenche a largura; a extensão fica para fora, à esquerda */
+    width: calc(100% * var(--board-scale, 1));
+    margin-left: calc(100% - 100% * var(--board-scale, 1));
+    -webkit-mask-image: radial-gradient(ellipse 40% 56% at 65% 50%, #000 55%, transparent 100%);
+    mask-image: radial-gradient(ellipse 40% 56% at 65% 50%, #000 55%, transparent 100%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .key {
+  .cpu-stage,
+  .cpu-energize,
+  .cpu-glyph-glow {
     animation: none;
   }
-}
 
-@media (max-width: 1200px) {
-  .plane {
-    --size: 240px;
-  }
-}
-
-@media (max-width: 960px) {
-  .visual {
-    height: 420px;
-  }
-
-  .plane {
-    --size: 210px;
-  }
-}
-
-@media (max-width: 480px) {
-  .visual {
-    height: 340px;
-  }
-
-  .plane {
-    --size: 160px;
-  }
-
-  .ring-3 {
+  .cpu-energize,
+  .cpu-traces {
     display: none;
   }
 }

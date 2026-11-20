@@ -1,17 +1,20 @@
 .hero {
   position: relative;
+  overflow: hidden; /* a placa-mãe ocupa o lado direito de ponta a ponta */
   padding: 88px 0 96px;
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   align-items: center;
-  gap: 48px;
+  gap: 64px;
 }
 
 .hero-content {
-  max-width: 620px;
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
 }
 
 .eyebrow {

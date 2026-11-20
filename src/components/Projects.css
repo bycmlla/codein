@@ -1,0 +1,201 @@
+.projects {
+  padding: 48px 0 120px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: clamp(2.4rem, 4.6vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.06em;
+  color: var(--text);
+}
+
+.projects-grid {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+
+/* Card */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background: #161922;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.project-card:hover {
+  border-color: rgba(110, 150, 255, 0.35);
+  transform: translateY(-3px);
+}
+
+.project-preview {
+  position: relative;
+  height: 285px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 9%;
+}
+
+.project-gmac .project-preview {
+  background: linear-gradient(135deg, #8a93ad 0%, #5c6480 55%, #3b4157 100%);
+}
+
+.project-jtd .project-preview {
+  background: linear-gradient(135deg, #a9c1ff 0%, #6f93ec 50%, #3f63c4 100%);
+}
+
+/* Janela simulada */
+.mock {
+  width: 100%;
+  height: 245px;
+  margin-bottom: -6px;
+  background: #f7f8fc;
+  border-radius: 12px 12px 0 0;
+  padding: 26px 30px;
+  color: #1a1d29;
+  box-shadow: 0 24px 50px -20px rgba(8, 14, 40, 0.55);
+  transition: transform 0.35s ease;
+}
+
+.mock-left {
+  transform: rotate(-2.4deg);
+}
+
+.mock-right {
+  transform: rotate(-2deg);
+}
+
+.project-card:hover .mock-left {
+  transform: rotate(-1.2deg) translateY(-4px);
+}
+
+.project-card:hover .mock-right {
+  transform: rotate(-1deg) translateY(-4px);
+}
+
+.mock-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #dfe3ee;
+  font-size: 1.05rem;
+}
+
+.mock-sep {
+  color: #1a1d29;
+  font-weight: 600;
+}
+
+.mock-list {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.mock-list li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.02rem;
+}
+
+.mock-list em {
+  color: var(--primary);
+}
+
+.mock-chart {
+  height: 120px;
+  margin-top: 26px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 18px;
+  border-bottom: 1px solid #d4d9e6;
+  padding: 0 4%;
+}
+
+.mock-chart span {
+  flex: 1;
+  max-width: 60px;
+  background: var(--primary);
+  border-radius: 3px 3px 0 0;
+}
+
+/* Corpo do card */
+.project-body {
+  padding: 40px 38px 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.project-category {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary-light);
+}
+
+.project-title {
+  margin: 18px 0 0;
+  font-size: clamp(1.7rem, 2.4vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  color: var(--text);
+}
+
+.project-text {
+  margin: 16px 0 28px;
+  font-size: 1.22rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.project-body .link {
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .project-preview {
+    height: 230px;
+  }
+
+  .mock {
+    height: 200px;
+    padding: 20px 22px;
+  }
+
+  .project-body {
+    padding: 30px 24px 28px;
+  }
+
+  .project-text {
+    font-size: 1.08rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mock-head,
+  .mock-list li {
+    font-size: 0.9rem;
+  }
+}

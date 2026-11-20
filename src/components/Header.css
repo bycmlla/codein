@@ -1,7 +1,7 @@
 .header {
   position: relative;
   z-index: 10;
-  max-width: 1640px;
+  max-width: none;
   margin: 0 auto;
   border-bottom: 1px solid var(--line);
 }

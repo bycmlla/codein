@@ -13,7 +13,7 @@
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
 
-  --container: 1200px;
+  --container: 1600px;
   --gutter: 24px;
 }
 
@@ -97,6 +97,6 @@ a {
 
 @media (min-width: 900px) {
   :root {
-    --gutter: 48px;
+    --gutter: clamp(48px, 7vw, 128px);
   }
 }
