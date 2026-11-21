@@ -1,6 +1,8 @@
+import { Link } from '../router.jsx'
+
 export default function Logo() {
   return (
-    <a href="/" className="logo" aria-label="CodeIn — página inicial">
+    <Link to="/" className="logo" aria-label="CodeIn — página inicial">
       <svg className="logo-icon" viewBox="0 0 48 42" fill="none" aria-hidden="true">
         <rect x="2" y="2" width="44" height="30" rx="5" stroke="currentColor" strokeWidth="2.5" />
         <path
@@ -16,6 +18,6 @@ export default function Logo() {
       <span className="logo-text">
         Code<span className="logo-accent">In</span>
       </span>
-    </a>
+    </Link>
   )
 }

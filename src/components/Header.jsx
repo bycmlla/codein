@@ -1,9 +1,11 @@
 import Logo from './Logo.jsx'
+import { Link } from '../router.jsx'
 import './Header.css'
 
+// Links absolutos ("/#...") para funcionarem também nas páginas de serviço
 const links = [
-  { label: 'Projetos', href: '#projetos' },
-  { label: 'Serviços', href: '#servicos' },
+  { label: 'Projetos', href: '/#projetos' },
+  { label: 'Serviços', href: '/#servicos' },
 ]
 
 export default function Header() {
@@ -15,15 +17,15 @@ export default function Header() {
           <ul className="nav-list">
             {links.map((link) => (
               <li key={link.href}>
-                <a className="nav-link" href={link.href}>
+                <Link className="nav-link" to={link.href}>
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
-          <a className="btn btn-outline nav-cta" href="#orcamento">
+          <Link className="btn btn-outline nav-cta" to="/#orcamento">
             Orçamento
-          </a>
+          </Link>
         </nav>
       </div>
     </header>
