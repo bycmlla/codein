@@ -1,0 +1,179 @@
+/* Página Sistemas Sob Medida — reaproveita ServicePage.css e SitesPage.css */
+
+/* Cinco especialidades: o último item ocupa a linha inteira, sem deixar um "buraco" */
+@media (min-width: 861px) {
+  .sys-types .sites-type:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Cards dos sistemas: as capas variam entre 16:9 e ≈2,3:1; em 2:1 nenhuma perde
+   informação importante (corte mínimo, centralizado) */
+.sys-card .site-card-media {
+  aspect-ratio: 2 / 1;
+}
+
+.sys-card .site-card-media img {
+  object-position: center;
+}
+
+.sys-card-category {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  color: var(--primary-light);
+}
+
+/* Modernização */
+.sys-kicker {
+  margin: 0 0 14px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary-soft);
+}
+
+.sys-checklist {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  max-width: 720px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+
+.sys-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.sys-checklist li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 14px;
+  height: 1.5px;
+  background: var(--primary);
+}
+
+@media (max-width: 640px) {
+  .sys-checklist {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Página individual do sistema ---------- */
+
+.sysp-category {
+  margin: 18px 0 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--primary-light);
+}
+
+.sysp-overview {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 64px;
+}
+
+.sysp-label {
+  margin: 0 0 20px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary-soft);
+}
+
+.sysp-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.sysp-features li {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.sysp-features li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 14px;
+  height: 1.5px;
+  translate: 0 -4px;
+  background: var(--primary);
+}
+
+.sysp-gallery {
+  margin-top: 72px;
+}
+
+.sysp-gallery .pp-viewer {
+  margin-top: 0;
+}
+
+.sysp-gallery-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.sysp-gallery-head .sysp-label {
+  margin: 0;
+}
+
+.sysp-gallery-note {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.sysp-cta {
+  margin-top: 72px;
+}
+
+@media (max-width: 960px) {
+  .sysp-overview {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sysp-overview {
+    margin-top: 40px;
+  }
+
+  .sysp-gallery {
+    margin-top: 56px;
+  }
+
+  .sysp-gallery-note {
+    display: none;
+  }
+}

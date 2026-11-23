@@ -1,0 +1,37 @@
+/* Complementos da galeria (estilos base em src/pages/SiteProjectPage.css) */
+
+/* Capturas de página inteira: largura legível e rolagem vertical no modo ampliado */
+.lb-figure.is-tall {
+  width: 100%;
+  max-height: calc(100vh - 128px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  justify-content: flex-start;
+  scrollbar-width: thin;
+}
+
+.lb-figure.is-tall img {
+  width: auto;
+  max-width: min(100%, 1400px);
+  max-height: none;
+  height: auto;
+}
+
+.lb-figure.is-tall .lb-caption {
+  position: sticky;
+  bottom: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(6, 8, 12, 0.85);
+}
+
+.lb-figure.is-tall:focus-visible {
+  outline: 2px solid var(--primary-light);
+  outline-offset: 4px;
+}
+
+@media (max-width: 760px) {
+  .lb-figure.is-tall {
+    max-height: calc(100vh - 160px);
+  }
+}

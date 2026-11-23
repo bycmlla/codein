@@ -1,0 +1,12 @@
+{
+  "_como_usar": "Imagens listadas aqui NÃO são publicadas (o script de otimização não gera a versão web delas). Depois de revisar ou editar o arquivo original, remova a linha e rode: py scripts/optimize_site_images.py",
+  "Sistemas/Service of Well Control/6.png": "Lista de empresas clientes com quantidade de alunos por empresa (informação comercial).",
+  "Sistemas/Service of Well Control/7.png": "Lista de alunos com nome completo, CPF, e-mail e telefone.",
+  "Sistemas/Service of Well Control/8.png": "Ficha de aluno com nome, CPF, data de nascimento, telefone, e-mail e endereço completo.",
+  "Sistemas/Service of Well Control/11.png": "Seleção de alunos com nomes completos e CPFs.",
+  "Sistemas/Service of Well Control/14.png": "Aniversariantes com nomes e telefones.",
+  "Sistemas/Service of Well Control/15.png": "Relatório de alunos com nomes, CPFs, e-mails e telefones.",
+  "Sistemas/Vexo/6.png": "Motoristas com nome completo e CPF (parecem dados de teste — confirmar).",
+  "Sistemas/Vexo/10.png": "Cadastro de motoristas com nome, CPF, telefone e CNH (parecem dados de teste — confirmar).",
+  "Sistemas/Vexo/11.png": "Fornecedores com nomes de contatos, telefones e e-mails (parecem dados de teste — confirmar)."
+}

@@ -2,3 +2,15 @@ node_modules
 dist
 *.log
 .DS_Store
+
+# Capturas com dados pessoais/comerciais em revisão (ver scripts/imagens_em_revisao.json).
+# Ficam só na máquina local até serem revisadas; o repositório é público.
+src/assets/Sistemas/Service of Well Control/6.png
+src/assets/Sistemas/Service of Well Control/7.png
+src/assets/Sistemas/Service of Well Control/8.png
+src/assets/Sistemas/Service of Well Control/11.png
+src/assets/Sistemas/Service of Well Control/14.png
+src/assets/Sistemas/Service of Well Control/15.png
+src/assets/Sistemas/Vexo/6.png
+src/assets/Sistemas/Vexo/10.png
+src/assets/Sistemas/Vexo/11.png

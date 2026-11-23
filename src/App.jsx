@@ -5,9 +5,12 @@ import Projects from './components/Projects.jsx'
 import ServicePage from './pages/ServicePage.jsx'
 import SitesPage from './pages/SitesPage.jsx'
 import SiteProjectPage from './pages/SiteProjectPage.jsx'
+import SystemsPage from './pages/SystemsPage.jsx'
+import SystemProjectPage from './pages/SystemProjectPage.jsx'
 import NotFound from './pages/NotFound.jsx'
 import { findService, serviceRedirects } from './data/services.js'
 import { findSiteProject } from './data/siteProjects.js'
+import { findSystemProject } from './data/systemProjects.js'
 import { Redirect, useDocumentMeta, useLocation, useScrollOnNavigate } from './router.jsx'
 
 const HOME_TITLE = 'CodeIn Tecnologia'
@@ -36,9 +39,17 @@ function Routes({ pathname }) {
     return project ? <SiteProjectPage project={project} /> : <NotFound />
   }
 
+  // Projetos de sistemas: /servicos/sistemas/<projeto>
+  const systemMatch = path.match(/^\/servicos\/sistemas\/([^/]+)$/)
+  if (systemMatch) {
+    const project = findSystemProject(decodeURIComponent(systemMatch[1]))
+    return project ? <SystemProjectPage project={project} /> : <NotFound />
+  }
+
   const match = path.match(/^\/servicos\/([^/]+)$/)
   const service = match && findService(match[1])
   if (service?.slug === 'sites') return <SitesPage service={service} />
+  if (service?.slug === 'sistemas') return <SystemsPage service={service} />
   if (service) return <ServicePage service={service} />
   if (match && serviceRedirects[match[1]]) return <Redirect to={serviceRedirects[match[1]]} />
   if (path === '/servicos') return <Redirect to="/#servicos" />
