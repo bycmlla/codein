@@ -9,6 +9,22 @@ const listeners = new Set()
 let version = 0
 let lastWasPop = false
 
+// Prefixo onde o site está publicado (ex.: "/codein" no GitHub Pages; vazio em desenvolvimento).
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '')
+
+/** Acrescenta o prefixo do site a caminhos absolutos internos ("/servicos" → "/codein/servicos"). */
+export function withBase(to) {
+  return typeof to === 'string' && to.startsWith('/') && !to.startsWith('//') ? BASE + to : to
+}
+
+/** Remove o prefixo do site do caminho atual, para as rotas trabalharem sempre a partir de "/". */
+function stripBase(pathname) {
+  if (BASE && (pathname === BASE || pathname.startsWith(BASE + '/'))) {
+    return pathname.slice(BASE.length) || '/'
+  }
+  return pathname
+}
+
 if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
   // a posição de rolagem é restaurada por nós ao usar Voltar/Avançar
   window.history.scrollRestoration = 'manual'
@@ -38,7 +54,7 @@ function saveScroll() {
 }
 
 export function navigate(to) {
-  const url = new URL(to, window.location.href)
+  const url = new URL(withBase(to), window.location.href)
   const current = window.location.pathname + window.location.search + window.location.hash
   const next = url.pathname + url.search + url.hash
   saveScroll()
@@ -49,7 +65,7 @@ export function navigate(to) {
 
 /** Substitui a URL atual (sem criar entrada no histórico) — usado em redirecionamentos. */
 export function redirect(to) {
-  const url = new URL(to, window.location.href)
+  const url = new URL(withBase(to), window.location.href)
   window.history.replaceState(null, '', url.pathname + url.search + url.hash)
   lastWasPop = false
   notify()
@@ -66,7 +82,7 @@ export function Redirect({ to }) {
 /** Re-renderiza a cada navegação e devolve a localização atual. */
 export function useLocation() {
   useSyncExternalStore(subscribe, () => version)
-  return { pathname: window.location.pathname, hash: window.location.hash, key: version }
+  return { pathname: stripBase(window.location.pathname), hash: window.location.hash, key: version }
 }
 
 /** Link interno: navega sem recarregar; mantém o comportamento padrão com Ctrl/Cmd/clique do meio. */
@@ -88,7 +104,7 @@ export function Link({ to, onClick, ...props }) {
     navigate(to)
   }
 
-  return <a href={to} onClick={handleClick} {...props} />
+  return <a href={withBase(to)} onClick={handleClick} {...props} />
 }
 
 /** Rola até a âncora (ou ao topo) sempre que a rota muda; no Voltar, restaura a posição. */
